@@ -1,0 +1,87 @@
+/*
+ * Definition of all mixins
+ */
+$vendor-prefixes = webkit moz o ms official
+
+vendor(prop, args...)
+  for prefix in $vendor-prefixes
+    unless prefix == official
+      property = '-' + prefix + '-' + prop
+      add-property(property, args)
+  add-property(prop, args)
+
+mix-anim()
+  vendor('animation', arguments)
+
+mix-box-shadow()
+  vendor('box-shadow', arguments)
+
+mix-text-shadow()
+  vendor('text-shadow', arguments)
+
+mix-border-radius()
+  vendor('border-radius', arguments)
+
+mix-border-tl-radius()
+  vendor('border-top-left-radius', arguments)
+
+mix-border-tr-radius()
+  vendor('border-top-right-radius', arguments)
+
+mix-border-bl-radius()
+  vendor('border-bottom-left-radius', arguments)
+
+mix-border-br-radius()
+  vendor('border-bottom-right-radius', arguments)
+
+mix-box-sizing(sizing)
+  vendor('box-sizing', arguments)
+
+mix-transition()
+  vendor('transition', arguments)
+
+mix-transform()
+  vendor('transform', arguments)
+
+mix-user-select()
+  vendor('user-select', arguments)
+
+mix-white-space()
+  vendor('white-space', arguments)
+
+ellipsis1(width-px)
+  display inline-block
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+  width width-px
+
+ellipsis2(line-count)
+  display inline-block
+  overflow hidden
+  padding 0
+  line-height 1.2em
+  height line-count * 1.2em
+
+circle()
+  mix-border-radius(50%)
+
+stroke(blur-size, color)
+  text-shadow         -1px -1px blur-size color, -1px 1px blur-size color, 1px -1px blur-size color, 1px 1px blur-size color
+  -webkit-text-shadow -1px -1px blur-size color, -1px 1px blur-size color, 1px -1px blur-size color, 1px 1px blur-size color
+  -moz-text-shadow    -1px -1px blur-size color, -1px 1px blur-size color, 1px -1px blur-size color, 1px 1px blur-size color
+  -o-text-shadow      -1px -1px blur-size color, -1px 1px blur-size color, 1px -1px blur-size color, 1px 1px blur-size color
+  -ms-text-shadow     -1px -1px blur-size color, -1px 1px blur-size color, 1px -1px blur-size color, 1px 1px blur-size color
+
+size(size)
+  width   size
+  height  size
+
+size2(width, height)
+  width   width
+  height  height
+
+background-icon(offsetX, offsetY, urlSrc)
+  background-position offsetX offsetY
+  background-repeat no-repeat
+  background-image url(urlSrc)

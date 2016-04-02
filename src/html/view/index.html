@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8"               http-equiv="Content-Type">
+    <meta content="IE=edge"                               http-equiv="X-UA-Compatible">
+    <meta content="p1100i <p1100i.dev@gmail.com> (https://p1100i.github.io)"                         name="author">
+    <meta content="Demo for some sorting methods."                    name="description">
+    <meta content="keywords"                              name="keywords">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>jsorted</title>
+
+    <!-- <link rel="icon" href="image/favicon.ico"> -->
+    <link type="text/css" rel="stylesheet"  href="css/app.css">
+
+    <script type="text/javascript" src="js/lib.js"  defer></script>
+    <script type="text/javascript" src="js/app.js"  defer></script>
+  </head>
+
+  <body data-ng-controller="appController" tabindex="0" data-ng-keydown="onKeydown($event)">
+    <div class="page-wrapper" >
+      <div class="content-frame" data-ng-include="'header.html'"></div>
+
+      <div class="content-wrapper">
+        <!-- ng-view works by using angular routing. -->
+        <!-- see: https://docs.angularjs.org/api/ngRoute/directive/ngView -->
+        <div class="content" data-ng-view=""></div>
+      </div>
+
+    </div>
+    <div class="content-frame" data-ng-include="'footer.html'"></div>
+  </body>
+</html>

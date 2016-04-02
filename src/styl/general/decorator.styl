@@ -1,0 +1,141 @@
+.shadow
+  mix-box-shadow 0 0 10px 3px $shadow-color
+
+.shadow-bottom
+  mix-box-shadow 0 5px 10px 3px $shadow-color
+
+.shadow-top
+  mix-box-shadow 0 -5px 10px 3px $shadow-color
+
+.shadow-bottom-inner
+  mix-box-shadow inset 0 -12px 12px -12px $shadow-color
+
+.width-30p
+  width 30% !important
+
+.width-40p
+  width 40% !important
+
+.width-50p
+  width 50% !important
+
+.width-60p
+  width 60% !important
+
+.width-70p
+  width 70% !important
+
+.width-100p
+  width 100% !important
+
+.none
+  display none !important
+
+.hidden, .hidden *
+  visibility hidden !important
+  height 0 !important
+
+.block
+  display block
+
+.inline-block
+  display inline-block
+
+.inline
+  display inline
+
+.vertical-top
+  vertical-align top
+
+.vertical-middle
+  vertical-align middle
+
+.left
+  float left
+
+.right
+  float right
+
+.text-center
+  text-align center !important
+
+.text-left
+  text-align left !important
+
+.text-right
+  text-align right !important
+
+.normalcase
+  text-transform initial !important
+
+.clickable, .clickable *
+  cursor pointer
+  mix-user-select(none)
+
+.selectable, .selectable *
+  cursor text
+  mix-user-select(text)
+
+.unselectable, .unselectable *
+  cursor default
+  mix-user-select(none)
+
+.user-html
+  text-align initial
+  list-style-type initial
+  mix-white-space(pre-wrap)
+  word-wrap break-word
+  max-width 800px
+  ol, ul
+    padding-left 20px
+  ul
+    list-style-type initial
+  a
+    font-weight bold
+    color $grey
+    &:hover
+      color $grey-light
+
+.bold
+  font-weight bold
+
+.uppercase
+  text-transform uppercase
+
+.border-radius
+  mix-border-radius($border-radius)
+
+.border-t-radius
+  mix-border-tl-radius($border-radius)
+  mix-border-tr-radius($border-radius)
+
+.border-b-radius
+  mix-border-bl-radius($border-radius)
+  mix-border-br-radius($border-radius)
+
+.border-tl-radius
+  mix-border-tl-radius($border-radius)
+
+.border-tr-radius
+  mix-border-tr-radius($border-radius)
+
+.border-bl-radius
+  mix-border-bl-radius($border-radius)
+
+.border-br-radius
+  mix-border-br-radius($border-radius)
+
+.selected
+  background-color $selected-color !important
+
+.no-bg
+  background-color transparent !important
+
+.link
+  display           table-cell
+  padding           0 10px
+  vertical-align    middle
+  background-color  $grey
+  color             $grey-white
+  &:hover
+    color white

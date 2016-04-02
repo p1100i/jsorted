@@ -1,0 +1,42 @@
+<div class="about-template text-center">
+  <div class="element-wrapper">
+    <div data-ng-controller="effectController">
+      <canvas id="paper-canvas"></canvas>
+    </div>
+    <table class="info shadow">
+      <tbody>
+        <tr>
+          <td class="text-left">
+            <span class="icon octicon octicon-eye"></span>
+            <span>Read:</span>
+            <span data-ng-bind="counts.read"></span>
+          </td>
+
+          <td class="text-center">
+            <span class="icon octicon octicon-law"></span>
+            <span>Compared:</span>
+            <span data-ng-bind="counts.compare"></span>
+          </td>
+
+          <td class="text-right">
+            <span class="icon octicon octicon-sync"></span>
+            <span>Swapped:</span>
+            <span data-ng-bind="counts.swap"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="controls">
+      <tbody>
+        <tr>
+          <td><a class="control link" href="#/" data-ng-click="toggleRunning()" data-ng-bind="running ? 'pause' : 'resume'"></a></td>
+          <td><a class="control link" href="#/" data-ng-click="populate()">restart</a></td>
+          <td><a class="control link" href="#/" data-ng-click="changeTimeUnit(10)">slower</a></td>
+          <td><a class="control link" href="#/" data-ng-click="changeTimeUnit(-10)">faster</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

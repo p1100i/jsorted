@@ -1,0 +1,82 @@
+body
+  text-align        center
+  background-color  #dedede
+  color             #545454
+
+div.page-wrapper
+  height          auto
+  min-height      100%
+  mix-user-select(none)
+
+div.content-frame
+  min-width $content-width
+
+div.content-wrapper
+  width           $content-width
+  margin          0 auto
+  padding-top     $header-height
+  display         table
+  padding-bottom  $footer-height + 50px
+
+div.content
+  margin-top 40px
+
+nav.header
+  color             white
+  z-index           3
+  position          fixed
+  width             100%
+  height            $header-height
+  background-color  $grey
+
+div.footer
+  color             white
+  clear             both
+  position          relative
+  height            $footer-height
+  margin-top        -1 * $footer-height
+  text-align        right
+  background-color  $grey-dark
+
+  span.note
+    display       inline-block
+    height        $footer-height - 5px
+    line-height   $footer-height - 5px
+
+span.github-icon
+  margin-left 5px
+
+div.menu-wrapper
+  text-align center
+
+a.menu-button
+  color           $grey-white
+  display         table-cell
+  padding         0 10px
+  vertical-align  middle
+  &:hover
+    color white
+    stroke(1px, #a2a2a2)
+
+table.menu
+  width 100%
+  height $header-height
+
+  td.title-cell
+    width 150px
+    *
+      font-size 18px
+
+  td.volume-cell
+    width 50px
+    padding-left 100px
+
+select.sorter-select
+  color $grey
+  font-size 18px
+  &:hover
+    mix-box-shadow 0 0 10px 2px white
+
+a.volume
+  size2(50px, 50px)
+  padding 0

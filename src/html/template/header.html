@@ -1,0 +1,31 @@
+<nav class="header shadow-bottom" role="navigation">
+  <div class="menu-wrapper">
+    <table class="menu">
+      <tbody>
+        <tr>
+          <td class="title-cell">
+            <a class="menu-button" href="https://github.com/p1100i">jsorted<span class="github-icon octicon octicon-mark-github"></span></a>
+          </td>
+
+          <td>
+            <select
+              name="sorter"
+              class="sorter-select"
+              data-ng-model="sort.selectedSorterIndex"
+              data-ng-change="onChangeSort($event)"
+              data-ng-options="sorter.index as sorter.title for sorter in sort.sorters">
+              <option value="" disabled selected>Select a sorting algorithm</option>
+            </select>
+          </td>
+
+          <td class="volume-cell">
+            <a class="menu-button volume" data-ng-click="toggleMute()">
+              <span class="octicon" data-ng-class="{ true : 'octicon-mute', false : 'octicon-unmute' }[!!muted]"></span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</nav>
+

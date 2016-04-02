@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+test/coverage
+bower_components
+build/precompiled/*
+build/compiled/*
+build/minified/*

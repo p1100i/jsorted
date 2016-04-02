@@ -1,0 +1,44 @@
+*
+  cursor      default
+  margin      0
+  padding     0
+  font-size   100%
+  font-family Verdana, Arial, 'Trebuchet MS'
+
+html
+  height 100%
+
+body
+  height 100%
+
+h2
+  font-size 1.5em
+
+h3
+  font-size 1.2em
+
+a, [data-ng-click], [ng-click], select
+  cursor pointer
+  *
+    cursor pointer
+
+ul
+  list-style-type none
+
+a
+  text-decoration none
+
+input[type=text], input[type=password], textarea
+  color   $grey
+  padding 3px
+  border  2px solid $grey
+  mix-border-radius(5px)
+
+  &:focus
+    color        $grey-dark
+    border-color $grey-light
+
+input[type=submit]
+  border            0 none
+  cursor            pointer
+  text-transform    uppercase
