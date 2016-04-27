@@ -2,7 +2,7 @@ var
   AboutControllerFactoryConstructor;
 
 AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(app) {
-  app.controller('aboutController', ['$rootScope', '$scope', '$timeout', '$window', '$q', 'angular', 'Zound', 'quicksort', 'bubblesort', 'arrayService', 'settingService', function AboutControllerFactory($rootScope, $scope, $timeout, $window, $q, angular, Zound, quicksort, bubblesort, arrayService, settingService) {
+  app.controller('aboutController', ['$rootScope', '$scope', '$timeout', '$window', '$q', 'angular', 'Zound', 'quicksort', 'bubblesort', 'mergesort', 'arrayService', 'settingService', function AboutControllerFactory($rootScope, $scope, $timeout, $window, $q, angular, Zound, quicksort, bubblesort, mergesort, arrayService, settingService) {
     var
       running,
       sorting,
@@ -75,6 +75,12 @@ AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(a
         settingService.play();
       },
 
+      stepIterate = function stepIterate() {
+        setRunning(true);
+        iterate();
+        setRunning(false);
+      },
+
       restart = function restart() {
         populate();
         setRunning(true);
@@ -101,8 +107,10 @@ AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(a
         $scope.populate       = populate;
         $scope.toggleRunning  = toggleRunning;
         $scope.toggleSound    = toggleSound;
+        $scope.stepIterate    = stepIterate;
 
         arrayService.addSorter('quickSort',   'Quicksort',    quicksort);
+        arrayService.addSorter('mergeSort',   'Merge sort',   mergesort);
         arrayService.addSorter('bubbleSort',  'Bubble sort',  bubblesort);
 
         settingService.play();

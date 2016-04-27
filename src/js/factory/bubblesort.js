@@ -26,7 +26,7 @@ BubblesortFactoryFactoryConstructor = function BubblesortFactoryFactoryConstruct
               return;
             }
 
-            arrayService.broadcastFinalized(0);
+            arrayService.finalize(0);
             sortDeferred.resolve();
           },
 
@@ -37,7 +37,7 @@ BubblesortFactoryFactoryConstructor = function BubblesortFactoryFactoryConstruct
             }
 
             if (lastStep) {
-              arrayService.broadcastFinalized(passLastSwap + 1, lastSwap);
+              arrayService.finalize(passLastSwap + 1, lastSwap);
               lastSwap = passLastSwap;
               restartPass();
             } else {

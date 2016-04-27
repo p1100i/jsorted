@@ -2,7 +2,7 @@ var
   EffectsControllerFactoryConstructor;
 
 EffectsControllerFactoryConstructor = function EffectsControllerFactoryConstructor(app) {
-  app.controller('effectController', ['$rootScope', '$scope', '$window', '$timeout', 'paper', 'arrayService', 'settingService', function EffectsControllerFactory($rootScope, $scope, $window, $timeout, paper, arrayService, settingService) {
+  app.controller('effectController', ['$rootScope', '$scope', '$window', '$timeout', 'paper', 'settingService', function EffectsControllerFactory($rootScope, $scope, $window, $timeout, paper, settingService) {
     var
       barTypes  = {},
       canvas    = document.getElementById('paper-canvas'),
@@ -101,20 +101,25 @@ EffectsControllerFactoryConstructor = function EffectsControllerFactoryConstruct
         paper.view.draw();
       },
 
-      onValueAdded = function onValueAdded($event, id, index, value, colorized) {
-        if (id !== arrayService.getArrayId()) {
-          return;
+      onValues = function onValues($event, values) {
+        var
+          i,
+          valueObj;
+
+        for (i = 0; i < values.length; i++) {
+          valueObj = values[i];
+          drawBar('value', valueObj.index, valueObj.value);
         }
 
+        redraw();
+      },
+
+      onValueAdded = function onValueAdded($event, index, value, colorized) {
         drawBar('value', index, value, colorized);
         redraw();
       },
 
-      onIndexMarked = function onIndexMarked($event, id, index, markerType) {
-        if (id !== arrayService.getArrayId()) {
-          return;
-        }
-
+      onIndexMarked = function onIndexMarked($event, index, markerType) {
         drawBar(markerType, index);
         redraw();
       },

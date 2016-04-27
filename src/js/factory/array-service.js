@@ -18,26 +18,18 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
       },
 
       broadcastMark = function broadcastMark(i, markerType) {
-        $rootScope.$broadcast('indexMarked', arrayId, i, markerType);
+        $rootScope.$broadcast('indexMarked', i, markerType);
       },
 
       broadcastAdd = function broadcastAdd(i, value) {
-        $rootScope.$broadcast('valueAdded', arrayId, i, value);
+        $rootScope.$broadcast('valueAdded', i, value);
       },
 
-      broadcastFinalized = function broadcastFinalized(i, j) {
+      broadcastFinalized = function broadcastFinalized(i) {
         var
-          value;
-
-        if (isNaN(j)) {
-          j = i;
-        }
-
-        while (i <= j) {
           value = array[i];
-          $rootScope.$broadcast('valueAdded', arrayId, i, value, true);
-          i++;
-        }
+
+        $rootScope.$broadcast('valueAdded', i, value, true);
       },
 
       hideMarkers = function hideMarkers() {
@@ -108,7 +100,6 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
           val = predefined ? predefined[i] : getUniqueRandomValue(max);
           addValue(i, val);
         }
-        console.log('array filled', JSON.stringify(array));
       },
 
       getArrayLength = function getArrayLength() {
@@ -213,6 +204,12 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
         return setResolveWith(value);
       },
 
+      finalize = function finalize(i, j) {
+        do {
+          broadcastFinalized(i);
+        } while (++i <= j);
+      },
+
       read = function read(i, markerType) {
         var
           value;
@@ -229,39 +226,71 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
       },
 
       decideSwap = function decideSwap(swap, i, j) {
+        if (!swap) {
+          return setResolveWith(false, true);
+        }
+
         var
           big,
           smaller;
 
-        if (swap) {
-          big     = array[i];
-          smaller = array[j];
+        big     = array[i];
+        smaller = array[j];
 
-          counts.swap++;
+        counts.swap++;
 
-          array[i]    = smaller;
-          array[j]    = big;
+        array[i]    = smaller;
+        array[j]    = big;
 
-          broadcastAdd(i, smaller);
-          broadcastAdd(j, big);
+        broadcastAdd(i, smaller);
+        broadcastAdd(j, big);
 
-          broadcastMark(i, 'swapSmall');
-          broadcastMark(j, 'swapBig');
+        broadcastMark(i, 'swapSmall');
+        broadcastMark(j, 'swapBig');
 
-          settingService.play(normalize(smaller));
-          return setResolveWith(true);
-        }
+        settingService.play(normalize(smaller));
 
-        return setResolveWith(false, true);
+        return setResolveWith(true);
       },
 
-      compare = function compare(i, j) {
+      visualize = function visualize(i, j) {
+        for (; i <= j; i++) {
+          broadcastAdd(i, array[i]);
+        }
+
+        return setResolveWith(true);
+      },
+
+      decideMove = function decideMove(move, movedIndex, destination, instantly) {
+        if (!move) {
+          return setResolveWith(false, true);
+        }
+
+        var
+          value,
+          movedValue = array[movedIndex];
+
+        for (; movedIndex > destination; movedIndex--) {
+          value = array[movedIndex - 1];
+          array[movedIndex] = value;
+        }
+
+        array[destination] = movedValue;
+
+        return setResolveWith(true, instantly);
+      },
+
+      compare = function compare(i, j, play, instantly) {
         broadcastMark(i, 'swapSmall');
         broadcastMark(j, 'swapBig');
 
         counts.compare++;
 
-        return setResolveWith(array[i] > array[j]);
+        if (play) {
+          settingService.play(normalize(array[i]));
+        }
+
+        return setResolveWith(array[i] > array[j], instantly);
       };
 
     return {
@@ -270,7 +299,9 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
       'broadcastFinalized'  : broadcastFinalized,
       'clear'               : clear,
       'compare'             : compare,
+      'finalize'            : finalize,
       'decideSwap'          : decideSwap,
+      'decideMove'          : decideMove,
       'fill'                : fill,
       'getArrayId'          : getArrayId,
       'getArrayLength'      : getArrayLength,
@@ -283,6 +314,7 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
       'resolveDeferred'     : resolveDeferred,
       'selectNextSorter'    : selectNextSorter,
       'selectSorter'        : selectSorter,
+      'visualize'           : visualize,
       'unsetDeferred'       : unsetDeferred
     };
   }]);

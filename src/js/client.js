@@ -10,6 +10,7 @@ Client = function Client(app) {
       require('./factory/wave-service'),
       require('./factory/bubblesort'),
       require('./factory/quicksort'),
+      require('./factory/mergesort'),
       require('./controller/app-controller'),
       require('./controller/about-controller'),
       require('./controller/effect-controller')

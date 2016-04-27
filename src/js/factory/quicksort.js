@@ -38,10 +38,9 @@ QuicksortFactoryFactoryConstructor = function QuicksortFactoryFactoryConstructor
           innerCheck(left).then(function () {
             arrayService.decideSwap(true, i, right).then(function (didSwap) {
               if (right === left + 1) {
-                arrayService.broadcastFinalized(left);
-                arrayService.broadcastFinalized(right);
+                arrayService.finalize(left, right);
               } else {
-                arrayService.broadcastFinalized(i);
+                arrayService.finalize(i);
               }
 
               partitionDeferred.resolve(i);
@@ -57,6 +56,7 @@ QuicksortFactoryFactoryConstructor = function QuicksortFactoryFactoryConstructor
           quickSortDeferred = $q.defer();
 
         if (id !== arrayService.getArrayId()) {
+          quickSortDeferred.resolve();
           return;
         }
 
@@ -65,7 +65,7 @@ QuicksortFactoryFactoryConstructor = function QuicksortFactoryFactoryConstructor
         }
 
         if (left >= right) {
-          arrayService.broadcastFinalized(right);
+          arrayService.finalize(right);
           quickSortDeferred.resolve();
 
           return quickSortDeferred.promise;
