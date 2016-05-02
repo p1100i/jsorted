@@ -11,6 +11,7 @@ Client = function Client(app) {
       require('./factory/bubblesort'),
       require('./factory/quicksort'),
       require('./factory/mergesort'),
+      require('./factory/heapsort'),
       require('./controller/app-controller'),
       require('./controller/about-controller'),
       require('./controller/effect-controller')

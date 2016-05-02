@@ -21,21 +21,17 @@ MergesortFactoryFactoryConstructor = function MergesortFactoryFactoryConstructor
           return mergeDeferred.promise;
         }
 
-        arrayService.read(i).then(function (item) {
-          arrayService.read(j).then(function (otherItem) {
-            arrayService.compare(i, j, true).then(function (isItemGreater) {
-              arrayService.decideMove(isItemGreater, j, i, true).then(function (didMove) {
-                if (didMove) {
-                  merge(left, right, i + 1, j + 1, mid + 1).then(function () {
-                    mergeDeferred.resolve();
-                  });
-                } else {
-                  merge(left, right, i + 1, j, mid).then(function () {
-                    mergeDeferred.resolve();
-                  });
-                }
+        arrayService.compare(i, j, true).then(function (isItemGreater) {
+          arrayService.decideMove(isItemGreater, j, i, true).then(function (didMove) {
+            if (didMove) {
+              merge(left, right, i + 1, j + 1, mid + 1).then(function () {
+                mergeDeferred.resolve();
               });
-            });
+            } else {
+              merge(left, right, i + 1, j, mid).then(function () {
+                mergeDeferred.resolve();
+              });
+            }
           });
         });
 

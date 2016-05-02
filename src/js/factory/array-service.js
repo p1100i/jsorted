@@ -62,6 +62,10 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
         return value;
       },
 
+      getRandomIndex = function getRandomIndex(i, j) {
+        return Math.floor(Math.random() * (j - i)) + i;
+      },
+
       clear = function clear() {
         counts.swap     = 0;
         counts.compare  = 0;
@@ -225,11 +229,7 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
         return setResolveWith(value, true);
       },
 
-      decideSwap = function decideSwap(swap, i, j) {
-        if (!swap) {
-          return setResolveWith(false, true);
-        }
-
+      swap = function swap(i, j, instantly) {
         var
           big,
           smaller;
@@ -250,7 +250,15 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
 
         settingService.play(normalize(smaller));
 
-        return setResolveWith(true);
+        return setResolveWith(true, instantly);
+      },
+
+      decideSwap = function decideSwap(decision, i, j) {
+        if (!decision) {
+          return setResolveWith(false, true);
+        }
+
+        return swap(i, j, false);
       },
 
       visualize = function visualize(i, j) {
@@ -259,6 +267,12 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
         }
 
         return setResolveWith(true);
+      },
+
+      print = function print() {
+        console.log(JSON.stringify(array));
+
+        return setResolveWith(true, true);
       },
 
       decideMove = function decideMove(move, movedIndex, destination, instantly) {
@@ -281,16 +295,24 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
       },
 
       compare = function compare(i, j, play, instantly) {
+        var
+          result = array[i] > array[j];
+
         broadcastMark(i, 'swapSmall');
         broadcastMark(j, 'swapBig');
 
         counts.compare++;
+        counts.read += 2;
 
         if (play) {
           settingService.play(normalize(array[i]));
         }
 
-        return setResolveWith(array[i] > array[j], instantly);
+        if (instantly) {
+          return result;
+        }
+
+        return setResolveWith(result);
       };
 
     return {
@@ -298,10 +320,13 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
       'broadcastMark'       : broadcastMark,
       'broadcastFinalized'  : broadcastFinalized,
       'clear'               : clear,
+      'getRandomIndex'      : getRandomIndex,
       'compare'             : compare,
       'finalize'            : finalize,
+      'swap'                : swap,
       'decideSwap'          : decideSwap,
       'decideMove'          : decideMove,
+      'print'               : print,
       'fill'                : fill,
       'getArrayId'          : getArrayId,
       'getArrayLength'      : getArrayLength,

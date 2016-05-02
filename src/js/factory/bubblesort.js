@@ -45,13 +45,9 @@ BubblesortFactoryFactoryConstructor = function BubblesortFactoryFactoryConstruct
             }
           };
 
-        arrayService.read(i, 'pivot').then(function (pivotItem) {
-          arrayService.read(i + 1).then(function (item) {
-            arrayService.compare(i, i + 1).then(function (isPivotItemGreater) {
-              arrayService.decideSwap(isPivotItemGreater, i, i + 1).then(function (swappedStep) {
-                finishStep(swappedStep);
-              });
-            });
+        arrayService.compare(i, i + 1).then(function (isPivotItemGreater) {
+          arrayService.decideSwap(isPivotItemGreater, i, i + 1).then(function (swappedStep) {
+            finishStep(swappedStep);
           });
         });
 
