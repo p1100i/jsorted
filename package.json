@@ -1,6 +1,6 @@
 {
   "name": "jsorted",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Demo for some sorting methods.",
   "scripts": {
     "test": "./grunt"
@@ -46,6 +46,7 @@
     "grunt-jscs": "^1.8.0",
     "grunt-md5symlink": "^0.1.0",
     "grunt-symlinkassets": "^0.1.1",
-    "require-directory": "^2.1.1"
+    "require-directory": "^2.1.1",
+    "zound": "^1.0.0"
   }
 }
