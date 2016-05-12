@@ -12,7 +12,10 @@
   "keywords": [
     "keywords"
   ],
-  "author": "p1100i",
+  "author": {
+    "name": "p1100i",
+    "email": "p1100i.dev@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.1",
@@ -22,26 +25,27 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
-    "require-directory": "^2.1.1",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-jasmine-nodejs": "^1.5.0",
-    "grunt-jscs": "^1.8.0",
-    "grunt-istanbul": "^0.7.0",
-    "grunt-env": "^0.4.4",
     "grunt-angular-templates": "^1.0.3",
     "grunt-bower-concat": "^1.0.0",
     "grunt-bower-task": "^0.4.0",
     "grunt-browserify": "^4.0.1",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-htmlmin": "^0.6.0",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-stylus": "^1.0.0",
     "grunt-contrib-uglify": "^0.11.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-env": "^0.4.4",
+    "grunt-gh-pages": "^1.1.0",
+    "grunt-istanbul": "^0.7.0",
+    "grunt-jasmine-nodejs": "^1.5.0",
+    "grunt-jscs": "^1.8.0",
     "grunt-md5symlink": "^0.1.0",
-    "grunt-symlinkassets": "^0.1.1"
+    "grunt-symlinkassets": "^0.1.1",
+    "require-directory": "^2.1.1"
   }
 }

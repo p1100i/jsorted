@@ -244,8 +244,8 @@ var
       },
 
       'minified': {
-        'src'   : 'build/minfied/**/*',
-        'dest'  : 'build/minfied'
+        'src'   : 'build/minified/**/*',
+        'dest'  : 'build/minified'
       }
     },
 
@@ -324,6 +324,18 @@ var
           }
         ]
       }
+    },
+
+    'gh-pages': {
+      'options': {
+        'base': 'build/minified',
+        'user': {
+          'name': '<%= pkg.author.name %>',
+          'email': '<%= pkg.author.email %>'
+        }
+      },
+
+      'src': ['**/*']
     },
 
     'watch' : {
@@ -426,6 +438,13 @@ var
       'test:style'
     ],
 
+    'publish' : [
+      'clean',
+      'setup',
+      'build',
+      'gh-pages'
+    ],
+
     'default' : [
       'test:style',
       'coverage',
@@ -449,25 +468,28 @@ var
       },
 
       init = function init() {
+        TASK_CONFIG.pkg = grunt.file.readJSON('package.json');
+
         grunt.initConfig(TASK_CONFIG);
 
-        grunt.loadNpmTasks('grunt-contrib-clean');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-contrib-watch');
-        grunt.loadNpmTasks('grunt-jasmine-nodejs');
-        grunt.loadNpmTasks('grunt-jscs');
-        grunt.loadNpmTasks('grunt-istanbul');
-        grunt.loadNpmTasks('grunt-env');
         grunt.loadNpmTasks('grunt-angular-templates');
         grunt.loadNpmTasks('grunt-bower-concat');
         grunt.loadNpmTasks('grunt-bower-task');
         grunt.loadNpmTasks('grunt-browserify');
+        grunt.loadNpmTasks('grunt-contrib-clean');
         grunt.loadNpmTasks('grunt-contrib-concat');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-contrib-cssmin');
         grunt.loadNpmTasks('grunt-contrib-htmlmin');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-contrib-stylus');
         grunt.loadNpmTasks('grunt-contrib-uglify');
+        grunt.loadNpmTasks('grunt-contrib-watch');
+        grunt.loadNpmTasks('grunt-env');
+        grunt.loadNpmTasks('grunt-gh-pages');
+        grunt.loadNpmTasks('grunt-istanbul');
+        grunt.loadNpmTasks('grunt-jasmine-nodejs');
+        grunt.loadNpmTasks('grunt-jscs');
         grunt.loadNpmTasks('grunt-md5symlink');
         grunt.loadNpmTasks('grunt-symlinkassets');
 
