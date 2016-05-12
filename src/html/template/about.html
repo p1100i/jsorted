@@ -1,43 +1,43 @@
 <div class="about-template text-center">
   <div class="element-wrapper">
+    <table class="controls">
+      <tbody>
+        <tr>
+          <td><a class="control link octicon octicon-versions"        title="Step frame-by-frame" data-ng-click="stepIterate()"></a></td>
+          <td><a class="control link octicon octicon-dash"            title="Slower"              data-ng-click="changeTimeMultiplier(1.5)"></a></td>
+          <td><a class="control link octicon octicon-dashboard time"  title="Time pause/resume"   data-ng-click="toggleRunning()" data-ng-class="{ 'running' : 'disabled' }" data-ng-bind="'x' + view.speedMultiplier"></a></td>
+          <td><a class="control link octicon octicon-plus"            title="Faster"              data-ng-click="changeTimeMultiplier(0.8)"></a></td>
+          <td><a class="control link octicon octicon-issue-reopened"  title="Restart"             data-ng-click="populate()"></a></td>
+        </tr>
+      </tbody>
+    </table>
+
     <div data-ng-controller="effectController">
       <canvas id="paper-canvas"></canvas>
     </div>
+
     <table class="info shadow">
       <tbody>
         <tr>
           <td class="text-left">
             <span class="icon octicon octicon-eye"></span>
             <span>Read:</span>
-            <span data-ng-bind="counts.read"></span>
+            <span data-ng-bind="view.counts.read"></span>
           </td>
 
           <td class="text-center">
             <span class="icon octicon octicon-law"></span>
             <span>Compared:</span>
-            <span data-ng-bind="counts.compare"></span>
+            <span data-ng-bind="view.counts.compare"></span>
           </td>
 
           <td class="text-right">
             <span class="icon octicon octicon-sync"></span>
             <span>Swapped:</span>
-            <span data-ng-bind="counts.swap"></span>
+            <span data-ng-bind="view.counts.swap"></span>
           </td>
         </tr>
       </tbody>
     </table>
-
-    <table class="controls">
-      <tbody>
-        <tr>
-          <td><a class="control link" href="#/" data-ng-click="toggleRunning()" data-ng-bind="running ? 'pause' : 'resume'"></a></td>
-          <td><a class="control link" href="#/" data-ng-click="stepIterate()">step</a></td>
-          <td><a class="control link" href="#/" data-ng-click="populate()">restart</a></td>
-          <td><a class="control link" href="#/" data-ng-click="changeTimeUnit(10)">slower</a></td>
-          <td><a class="control link" href="#/" data-ng-click="changeTimeUnit(-10)">faster</a></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-
 </div>

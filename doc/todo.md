@@ -1,0 +1,2 @@
+- make speed symbol two stated
+- add statistics count each execution with autron-checkbox

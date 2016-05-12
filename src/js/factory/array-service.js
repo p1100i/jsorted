@@ -280,6 +280,7 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
           return setResolveWith(false, true);
         }
 
+
         var
           value,
           movedValue = array[movedIndex];
@@ -287,6 +288,7 @@ ArrayServiceFactoryConstructor = function ArrayServiceFactoryConstructor(app) {
         for (; movedIndex > destination; movedIndex--) {
           value = array[movedIndex - 1];
           array[movedIndex] = value;
+          counts.swap++;
         }
 
         array[destination] = movedValue;

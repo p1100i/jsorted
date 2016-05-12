@@ -6,8 +6,11 @@ AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(a
     var
       running,
       sorting,
+      lastTimeMultiplier,
 
-      counts = arrayService.getCounts(),
+      view = {
+        'counts' : arrayService.getCounts()
+      },
 
       populate = function populate() {
         sorting = false;
@@ -38,11 +41,32 @@ AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(a
         });
       },
 
+      multiplyTimeStep = function multiplyTimeStep(timeMultiplier) {
+        if (timeMultiplier === undefined) {
+          return;
+        }
+
+        var
+          timeUnit = settingService.get('timeUnit');
+
+        if (timeMultiplier !== 0) {
+          timeMultiplier = Math.min(timeMultiplier, 20);
+          timeMultiplier = Math.max(timeMultiplier, 0.2);
+        }
+
+        settingService.set('timeMultiplier',  timeMultiplier);
+        settingService.set('timeStep',        timeMultiplier * timeUnit);
+      },
+
       setRunning = function setRunning(value) {
         $scope.running = running = value;
 
-        if (!running) {
-          settingService.play();
+        if (running) {
+          multiplyTimeStep(lastTimeMultiplier);
+          lastTimeMultiplier = undefined;
+        } else {
+          lastTimeMultiplier = settingService.get('timeMultiplier');
+          multiplyTimeStep(0);
         }
       },
 
@@ -94,20 +118,42 @@ AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(a
         arrayService.selectNextSorter();
       },
 
-      toggleSound = function toggleSound() {
-        settingService.toggleSound();
+      changeTimeMultiplier = function changeTimeMultiplier(multiplier) {
+        if (!running) {
+          setRunning(true);
+        }
+
+        var
+          timeMultiplier = settingService.get('timeMultiplier');
+
+        timeMultiplier *= multiplier;
+
+        multiplyTimeStep(timeMultiplier);
+      },
+
+      setViewSpeed = function setViewSpeed() {
+        var
+          timeMultiplier  = settingService.get('timeMultiplier'),
+          speedMultiplier = timeMultiplier === 0 ? 0 : 1 / timeMultiplier;
+
+        view.speedMultiplier = speedMultiplier.toFixed(2);
+      },
+
+      onSettingChanged = function onSettingChanged() {
+        setViewSpeed();
       },
 
       init = function init() {
         $scope.$on('update',            iterate);
         $scope.$on('selectedSorterSet', onSelectedSorterSet);
+        $scope.$on('settingChanged',    onSettingChanged);
         $scope.$on('effectsReady',      onEffectsReady);
 
-        $scope.counts         = counts;
-        $scope.populate       = populate;
-        $scope.toggleRunning  = toggleRunning;
-        $scope.toggleSound    = toggleSound;
-        $scope.stepIterate    = stepIterate;
+        $scope.view                 = view;
+        $scope.populate             = populate;
+        $scope.stepIterate          = stepIterate;
+        $scope.toggleRunning        = toggleRunning;
+        $scope.changeTimeMultiplier = changeTimeMultiplier;
 
         arrayService.addSorter('heapSort',    'Heapsort',     heapsort);
         arrayService.addSorter('quickSort',   'Quicksort',    quicksort);
@@ -115,6 +161,7 @@ AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(a
         arrayService.addSorter('bubbleSort',  'Bubble sort',  bubblesort);
 
         settingService.play();
+        setViewSpeed();
       };
 
     init();

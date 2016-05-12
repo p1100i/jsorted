@@ -1,5 +1,6 @@
 .about-template
   canvas
+    background-color #ddd
     border 1px solid grey
     margin-top 20px
     mix-box-shadow 0 0 10px 3px $shadow-color
@@ -21,11 +22,11 @@
   .info, .controls
     margin-top 20px
 
-  .controls
-    td
-      padding-right 10px
-
   .control
-    height 30px
-    margin-right 5px
+    height  30px
+    width   90px
+    &:hover
+      background-color $grey-light
 
+  .time
+    width 140px

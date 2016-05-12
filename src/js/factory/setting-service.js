@@ -2,20 +2,22 @@ var
   SettingServiceFactoryConstructor;
 
 SettingServiceFactoryConstructor = function SettingServiceFactoryConstructor(app) {
-  app.factory('settingService', ['$rootScope', 'Zound', 'waveService', function ($rootScope, Zound, waveService) {
+  app.factory('settingService', ['$rootScope', '$cookies', 'Zound', 'waveService', function ($rootScope, $cookies, Zound, waveService) {
     var
       zound,
 
       DEFAULTS = {
-        'arrayLength' : 30,
-        'maxValue'    : 30,
-        'paperWidth'  : 600,
-        'paperHeight' : 300,
-        'timeUnit'    : 30,
-        'freqMin'     : 10,
-        'freqMax'     : 18,
-        'colorMin'    : 105 / 256,
-        'colorMax'    : 220 / 256
+        'arrayLength'     : 30,
+        'maxValue'        : 30,
+        'paperWidth'      : 600,
+        'paperHeight'     : 300,
+        'timeStep'        : 60,
+        'timeUnit'        : 60,
+        'timeMultiplier'  : 1,
+        'freqMin'         : 10,
+        'freqMax'         : 18,
+        'colorMin'        : 105 / 256,
+        'colorMax'        : 220 / 256
       },
 
       data = {},
@@ -33,14 +35,9 @@ SettingServiceFactoryConstructor = function SettingServiceFactoryConstructor(app
         $rootScope.$broadcast('settingChanged', key);
       },
 
-      toggleSound = function toggleSound() {
-        return;
-      },
-
       isMuted = function isMuted() {
         return zound.isMuted();
       },
-
 
       play = function play(freqScaler) {
         var
@@ -69,7 +66,6 @@ SettingServiceFactoryConstructor = function SettingServiceFactoryConstructor(app
     init();
 
     return {
-      'toggleSound' : toggleSound,
       'isMuted'     : isMuted,
       'play'        : play,
       'get'         : get,

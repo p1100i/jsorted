@@ -4,13 +4,14 @@
       <tbody>
         <tr>
           <td class="title-cell">
-            <a class="menu-button" href="https://github.com/p1100i">jsorted<span class="github-icon octicon octicon-mark-github"></span></a>
+            <a title="Projects GitHub page" class="menu-button" href="https://github.com/p1100i/jsorted">jsorted<span class="github-icon octicon octicon-mark-github"></span></a>
           </td>
 
           <td>
             <select
               name="sorter"
               class="sorter-select"
+              title="Change sorting method"
               data-ng-model="sort.selectedSorterIndex"
               data-ng-change="onChangeSort($event)"
               data-ng-options="sorter.index as sorter.title for sorter in sort.sorters">
@@ -19,7 +20,7 @@
           </td>
 
           <td class="volume-cell">
-            <a class="menu-button volume" data-ng-click="toggleMute()">
+            <a title="Mute / Unmute" class="menu-button volume" data-ng-click="toggleMute()">
               <span class="octicon" data-ng-class="{ true : 'octicon-mute', false : 'octicon-unmute' }[!!muted]"></span>
             </a>
           </td>

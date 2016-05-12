@@ -101,19 +101,6 @@ EffectsControllerFactoryConstructor = function EffectsControllerFactoryConstruct
         paper.view.draw();
       },
 
-      onValues = function onValues($event, values) {
-        var
-          i,
-          valueObj;
-
-        for (i = 0; i < values.length; i++) {
-          valueObj = values[i];
-          drawBar('value', valueObj.index, valueObj.value);
-        }
-
-        redraw();
-      },
-
       onValueAdded = function onValueAdded($event, index, value, colorized) {
         drawBar('value', index, value, colorized);
         redraw();

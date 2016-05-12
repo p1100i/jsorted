@@ -5,14 +5,13 @@ AppControllerFactoryConstructor = function AppControllerFactoryConstructor(app) 
   app.controller('appController', ['$rootScope', '$scope', '$window', 'arrayService', 'settingService', function AppControllerFactory($rootScope, $scope, $window, arrayService, settingService) {
     var
       updater,
-      timeUnit,
-      timediff,
+      timeStep,
+      timeDiff,
       timeoutId,
-      timeupdate,
+      timeUpdate,
       lastTimestamp,
 
       sort = {},
-
 
       requestUpdate = function requestUpdate() {
         if (timeoutId) {
@@ -22,19 +21,19 @@ AppControllerFactoryConstructor = function AppControllerFactoryConstructor(app) 
         $window.requestAnimationFrame(updater);
       },
 
-      setTimeUnit = function setTimeUnit() {
-        timeUnit = settingService.get('timeUnit');
+      setTimeStep = function setTimeStep() {
+        timeStep = settingService.get('timeStep');
       },
 
       update = function update(timestamp) {
         lastTimestamp = lastTimestamp || timestamp;
-        timediff      = timestamp - lastTimestamp;
-        timeupdate    = Math.max(0, timeUnit - timediff);
+        timeDiff      = timestamp - lastTimestamp;
+        timeUpdate    = Math.max(0, timeStep - timeDiff);
 
         $rootScope.$broadcast('update');
 
-        timeoutId     = $window.setTimeout(requestUpdate, timeupdate);
-        lastTimestamp = timestamp + timeupdate;
+        timeoutId     = $window.setTimeout(requestUpdate, timeUpdate);
+        lastTimestamp = timestamp + timeUpdate;
       },
 
       updateSort = function updateSort() {
@@ -54,13 +53,6 @@ AppControllerFactoryConstructor = function AppControllerFactoryConstructor(app) 
         $scope.muted = settingService.isMuted();
       },
 
-      changeTimeUnit = function changeTimeUnit(timeUnitDiff) {
-        var
-          currentTimeUnit = settingService.get('timeUnit');
-
-        settingService.set('timeUnit', currentTimeUnit + timeUnitDiff);
-      },
-
       onKeydown = function onKeydown($event) {
         if ($event && $event.keyCode === 27) {
           toggleMute();
@@ -76,7 +68,7 @@ AppControllerFactoryConstructor = function AppControllerFactoryConstructor(app) 
       },
 
       onSettingChanged = function onSettingChanged(timestamp) {
-        setTimeUnit();
+        setTimeStep();
       },
 
       init = function init() {
@@ -85,13 +77,12 @@ AppControllerFactoryConstructor = function AppControllerFactoryConstructor(app) 
         $scope.onKeydown      = onKeydown;
         $scope.toggleMute     = toggleMute;
         $scope.onChangeSort   = onChangeSort;
-        $scope.changeTimeUnit = changeTimeUnit;
 
         $scope.$on('selectedSorterSet', onSelectedSorterSet);
         $scope.$on('settingChanged',    onSettingChanged);
         $scope.$on('zound',             updateMuted);
 
-        setTimeUnit();
+        setTimeStep();
         updateSort();
         requestUpdate();
       };
