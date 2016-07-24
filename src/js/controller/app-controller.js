@@ -85,6 +85,7 @@ AppControllerFactoryConstructor = function AppControllerFactoryConstructor(app) 
         setTimeStep();
         updateSort();
         requestUpdate();
+        toggleMute();
       };
 
     init();

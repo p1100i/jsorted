@@ -162,6 +162,8 @@ AboutControllerFactoryConstructor = function AboutControllerFactoryConstructor(a
 
         settingService.play();
         setViewSpeed();
+
+        changeTimeMultiplier(0.1);
       };
 
     init();
