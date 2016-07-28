@@ -24,10 +24,6 @@ Client = function Client(app) {
       {
         'name'    : 'Zound',
         'object'  : require('zound')
-      },
-      {
-        'name'    : 'audio',
-        'object'  : require('h-audio')
       }
     ],
 

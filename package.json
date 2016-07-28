@@ -19,7 +19,6 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.1",
-    "h-audio": "^0.1.11",
     "node-static": "^0.7.7",
     "socket.io": "^1.4.5"
   },
